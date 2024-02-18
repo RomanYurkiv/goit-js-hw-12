@@ -24,6 +24,7 @@ form.addEventListener('submit', async function (e) {
   const inputValue = e.target.elements.input.value;
   searchParams.q = inputValue;
   searchParams.page = 1;
+  gallery.innerHTML = '';
   try {
     const images = await getPhotoByName();
     appendToGallery(images);
@@ -85,30 +86,6 @@ function appendToGallery(images) {
   lightBox.refresh();
 }
 
-// function appendToGallery(images) {
-//   const link = images.hits
-//     .map(
-//       image => `<a class="gallery-link" href="${image.largeImageURL}">
-//         <img class="gallery-image"
-//         src="${image.webformatURL}"
-//         alt="${image.tags}"
-//          </a>
-//          <div class="image-info">
-//           <p ><strong>Likes:</strong> <span class="text">${image.likes}</span></p>
-//           <p ><strong>Views:</strong> <span class="text">${image.views}</span></p>
-//           <p ><strong>Comments:</strong> <span class="text">${image.comments}</span></p>
-//           <p ><strong>Downloads:</strong> <span class="text">${image.downloads}</span></p>
-//           </div>
-          
-//         `
-//     )
-//     .join('');
-//   gallery.innerHTML += link;
-//   let lightBox = new SimpleLightbox('.gallery-link');
-//   lightBox.refresh();
-//   loader.style.display = 'none';
-// }
-
 function showLoadingMessage() {
   loader.style.display = 'flex';
 }
@@ -140,13 +117,6 @@ loadMoreBtn.addEventListener('click', async function () {
     console.error(error);
   }
 });
-
-// function showEndOfSearchMessage() {
-//   const endOfSearchMessage = document.createElement('div');
-//   endOfSearchMessage.textContent = "We're sorry, but you've reached the end of search results.";
-//   endOfSearchMessage.classList.add('end-of-search-message');
-//   document.body.appendChild(endOfSearchMessage);
-// }
 
 function smoothScrollToNextGallery() {
   const galleryItemHeight = document.querySelector('.gallery-link').getBoundingClientRect().height;
